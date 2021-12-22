@@ -40,6 +40,28 @@ typedef struct {
 } diagnosticTest;
 
 // Functions
+int mainMenu() {
+    int optionChoosen;
+
+    printf("\t**************************************************");
+    printf("\n\t** \t\t\t\t\t\t**");
+    printf("\n \t** \t\tCOVID Lookup System \t\t**");
+    printf("\n\t** \t\t\t\t\t\t**");
+    printf("\n\t**************************************************");
+
+    printf("\n\n\tMembers Inserted: %d \t\tTests Scheduled: %d", 1, 1);
+    printf("\n\tMembers Vaccinated: %d \t\tTests Performed: %d", 1, 1);
+
+    printf("\n\n\t1. Member Options");
+    printf("\n\t2. Vaccination Options");
+    printf("\n\t3. Test Options");
+    printf("\n\t4. Confinment Options");
+    
+    printf("\n\n\tOption: ");
+    scanf("%d", &optionChoosen);
+
+    return optionChoosen;
+}
 
 void switch_menu(){
     char option;
@@ -61,6 +83,9 @@ void switch_menu(){
 // Main function
 int main() {
     communityMember member[MAX_MEMBERS];
+    
+    mainMenu();
 
     return 0;
 }
+

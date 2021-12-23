@@ -69,22 +69,18 @@ void program_menu() //Function that triggers the program menu
 
     switch (option)
     {
-    case '1': //Add member of the comunity
+    case '1': //Member Options
        
         break;
-    case '2': //List members of the community
+    case '2': //Vaccination Options
 
         break;
-    case '3': //Register state of vaccination/lockdown
+    case '3': //Test Options
         break;
 
-    case '4': //Schedule a test for covid-19 (Max 15 PCR TYPE)
+    case '4': //Confinment Options
         break;
-    
-    case '5': //List all the done tests and change the date (MAYBE)
-        break;
-    
-    case '':
+
     default:
         break;
     }

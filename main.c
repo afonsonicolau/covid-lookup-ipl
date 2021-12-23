@@ -63,20 +63,19 @@ int mainMenu() {
     return optionChoosen;
 }
 
-void switch_menu(){
+void switch_menu() {
     char option;
 
-    switch (option)
-    {
-    case 'I': //Add member of the comunity
-       
-        break;
-    case 'L': //List members of the community
+    switch (option) {
+        case 'I': //Add member of the comunity
+        
+            break;
+        case 'L': //List members of the community
 
-        break;
-    
-    default:
-        break;
+            break;
+        
+        default:
+            break;
     }
 }
 

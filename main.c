@@ -63,19 +63,30 @@ int mainMenu() {
     return optionChoosen;
 }
 
-void switch_menu() {
+void program_menu() //Function that triggers the program menu
+{
     char option;
 
-    switch (option) {
-        case 'I': //Add member of the comunity
-        
-            break;
-        case 'L': //List members of the community
+    switch (option)
+    {
+    case '1': //Add member of the comunity
+       
+        break;
+    case '2': //List members of the community
 
-            break;
-        
-        default:
-            break;
+        break;
+    case '3': //Register state of vaccination/lockdown
+        break;
+
+    case '4': //Schedule a test for covid-19 (Max 15 PCR TYPE)
+        break;
+    
+    case '5': //List all the done tests and change the date (MAYBE)
+        break;
+    
+    case '':
+    default:
+        break;
     }
 }
 

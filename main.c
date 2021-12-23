@@ -41,6 +41,23 @@ typedef struct {
 
 // Functions
 
+void switch_menu(){
+    char option;
+
+    switch (option)
+    {
+    case 'I': //Add member of the comunity
+       
+        break;
+    case 'L': //List members of the community
+
+        break;
+    
+    default:
+        break;
+    }
+}
+
 // Main function
 int main() {
     communityMember member[MAX_MEMBERS];

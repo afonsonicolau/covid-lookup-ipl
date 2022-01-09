@@ -4,10 +4,9 @@
 #include <ctype.h>
 #include <locale.h>
 
-
+// Files
 #include "aux_functions.h"
 #include "members.h"
-
 
 
 communityMember readFromMember()
@@ -27,17 +26,13 @@ communityMember readFromMember()
     return data;
 }
 
-
-int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int snsNumber)
-{
+int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int snsNumber) {
     int i;
     int position = -1;
 
-    for (i = 0; i < quantity; i++)
-    {
+    for (i = 0; i < quantity; i++) {
 
-        if (arrayMember[i].snsNumber == snsNumber)
-        {
+        if (arrayMember[i].snsNumber == snsNumber) {
             position = i;
             i = quantity;
         }
@@ -45,8 +40,7 @@ int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int sns
     return position;
 }
 
-int createMember(communityMember arrayMember[MAX_MEMBERS], int quantity)
-{
+int createMember(communityMember arrayMember[MAX_MEMBERS], int quantity) {
     char vaccination;
     date date_member;
     int position;

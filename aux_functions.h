@@ -1,8 +1,10 @@
 #ifndef AUX_FUNCTIONS_H_INCLUDED
 #define AUX_FUNCTIONS_H_INCLUDED
 
+// Constants
 #define MAX_STRING 50
 
+// Structures
 typedef struct {
     int day;
     int month;
@@ -14,7 +16,7 @@ typedef struct {
     int minute;
 } time;
 
-
+// Functions
 void cleanBuffer(void);
 float readFloat(char message[MAX_STRING], float min, float max);
 int readInt(char message[MAX_STRING], int min, int max);

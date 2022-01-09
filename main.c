@@ -7,8 +7,7 @@
 // Headers
 #include "members.h"
 #include "aux_functions.h"
-#include "test_functions.h"
-
+#include "covid_tests.h"
 
 // Main function
 int main() {

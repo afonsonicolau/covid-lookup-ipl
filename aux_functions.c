@@ -6,7 +6,6 @@
 
 #include "aux_functions.h"
 
-
 void cleanBuffer(void) {
     char char_check;
 

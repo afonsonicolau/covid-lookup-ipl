@@ -1,8 +1,9 @@
-#ifndef TEST_FUNCTIONS_H_INCLUDED
+#ifndef COVID_TESTS_H_INCLUDED
+#define COVID_TESTS_H_INCLUDED
 
 #include "aux_functions.h"
 
-
+// Structures
 typedef struct {
     int id;
     int snsNumber;
@@ -12,6 +13,5 @@ typedef struct {
     time timeTaken;
     date dateTaken;
 } diagnosticTest;
-
 
 #endif

@@ -4,7 +4,9 @@
 #include <ctype.h>
 #include <locale.h>
 
-
+// Files
+#include "members.c"
+#include "covid_tests.c"
 
 int mainMenu() {
     int optionChoosen;
@@ -35,7 +37,7 @@ int mainMenu() {
 void program_menu(int option) { // Function that triggers the program menu {
     switch (option) {
         case 1: // Member Options
-
+        
             break;
         case 2: // Vaccination Options
 

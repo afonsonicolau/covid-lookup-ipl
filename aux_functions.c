@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <locale.h>
 
+// Auxiliary Functions Header
 #include "aux_functions.h"
 
 void cleanBuffer(void) {
@@ -26,7 +27,7 @@ float readFloat(char message[MAX_STRING], float min, float max) {
         if (control == 0) {
             printf("You must insert a float number: \n");
         }
-        else {
+        else {Headers
             if (number < min || number > max) {
                 printf("Invalid number, try again: \n");
             }

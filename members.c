@@ -5,12 +5,12 @@
 #include <locale.h>
 
 // Files
-#include "aux_functions.h"
+#include "aux_functions.c"
+
+// Members Header
 #include "members.h"
 
-
-communityMember readFromMember()
-{
+communityMember readFromMember() {
     communityMember data;
 
     data.snsNumber = readInt("SNS number: ", SNSNUMBER_MIN, SNSNUMBER_MAX);
@@ -64,4 +64,3 @@ int createMember(communityMember arrayMember[MAX_MEMBERS], int quantity) {
         }
     }
 }
-

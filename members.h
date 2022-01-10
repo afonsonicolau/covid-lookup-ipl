@@ -1,6 +1,7 @@
 #ifndef MEMBERS_H_INCLUDED
 #define MEMBERS_H_INCLUDED
 
+// Headers
 #include "aux_functions.h"
 
 // Constants

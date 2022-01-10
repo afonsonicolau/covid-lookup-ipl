@@ -4,10 +4,9 @@
 #include <ctype.h>
 #include <locale.h>
 
-// Headers
-#include "members.h"
-#include "aux_functions.h"
-#include "covid_tests.h"
+// Files
+#include "menus.c"
+#include "members.c"
 
 // Main function
 int main() {

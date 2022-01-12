@@ -4,6 +4,7 @@
 // Headers
 #include "members.h"
 #include "covid_tests.h"
+#include "menus.c"
 
 // Functions
 void mainMenu(communityMember arrayMember[MAX_MEMBERS], int quantity);

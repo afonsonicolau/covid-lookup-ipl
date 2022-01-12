@@ -4,15 +4,17 @@
 #include <ctype.h>
 #include <locale.h>
 
-// Files
+// Files & Headers
 #include "menus.c"
-#include "members.c"
+#include "menus.h"
+#include "members.h"
 
 // Main function
 int main() {
-    communityMember member[MAX_MEMBERS];
+    int quantity = 0;
+    communityMember members[MAX_MEMBERS];
 
-    mainMenu();
+    mainMenu(members, quantity);
 
     return 0;
 }

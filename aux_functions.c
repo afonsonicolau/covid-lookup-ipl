@@ -15,33 +15,11 @@ void cleanBuffer(void) {
     } while (char_check != '\n' && char_check != EOF);
 }
 
-float readFloat(char message[MAX_STRING], float min, float max) {
-    float number;
-    int control;
-
-    do {
-        printf("%s (%.2f a %.2f) :", message, min, max);
-        control = scanf("%f", &number);
-        cleanBuffer();
-
-        if (control == 0) {
-            printf("You must insert a float number: \n");
-        }
-        else {Headers
-            if (number < min || number > max) {
-                printf("Invalid number, try again: \n");
-            }
-        }
-    } while (number < min || number > max || control == 0);
-
-    return number;
-}
-
 int readInt(char message[MAX_STRING], int min, int max) {
     int number, control;
 
     do {
-        printf("%s (%d a %d) :", message, min, max);
+        printf("\t%s (%d to %d): ", message, min, max);
         control = scanf("%d", &number);
         cleanBuffer();
 
@@ -58,17 +36,39 @@ int readInt(char message[MAX_STRING], int min, int max) {
     return number;
 }
 
+float readFloat(char message[MAX_STRING], float min, float max) {
+    float number;
+    int control;
+
+    do {
+        printf("\t%s (%.2f to %.2f): ", message, min, max);
+        control = scanf("%f", &number);
+        cleanBuffer();
+
+        if (control == 0) {
+            printf("You must insert a float number: \n");
+        }
+        else {
+            if (number < min || number > max) {
+                printf("Invalid number, try again: \n");
+            }
+        }
+    } while (number < min || number > max || control == 0);
+
+    return number;
+}
+
 void readString(char message[MAX_STRING], char arrayChar[MAX_STRING], int maxChar) {
     int sizeString;
 
     do {
-        printf("%s", message);
+        printf("\t%s: ", message);
         fgets(arrayChar, maxChar, stdin);
 
         sizeString = strlen(arrayChar);
 
         if (sizeString == 1) {
-            printf("Please insert some information!\n\n");
+            printf("Please, insert some information!\n\n");
         }
     } while (sizeString == 1);
 
@@ -84,8 +84,8 @@ date readDate(void) {
     date date_read;
     int maxDaysMonth;
 
-    date_read.year = readInt("Insert a year: ", 2020, 2021);
-    date_read.month = readInt("Insert a month: ", 1, 12);
+    date_read.year = readInt("Insert a year", 2020, 2021);
+    date_read.month = readInt("Insert a month", 1, 12);
 
     switch (date_read.month) {
         case 2:
@@ -105,6 +105,7 @@ date readDate(void) {
             maxDaysMonth = 31;
     }
 
-    date_read.day = readInt("Insert a day: ", 1, maxDaysMonth);
+    date_read.day = readInt("Insert a day", 1, maxDaysMonth);
+    
     return date_read;
 }

@@ -5,4 +5,4 @@
 #include <locale.h>
 
 // Files
-#include "aux_functions.c"
+#include "aux_functions.h" 

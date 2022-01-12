@@ -5,8 +5,9 @@
 #include <locale.h>
 
 // Files
-#include "members.c"
-#include "covid_tests.c"
+#include "members.h"
+#include "covid_tests.h"
+#include "menus.h"
 
 int mainMenu() {
     int optionChoosen;

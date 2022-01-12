@@ -4,9 +4,13 @@
 #include <ctype.h>
 #include <locale.h>
 
-// Files
-#include "menus.c"
-#include "members.c"
+
+// Headers
+#include "members.h"
+#include "aux_functions.h"
+#include "menus.h"
+
+
 
 // Main function
 int main() {

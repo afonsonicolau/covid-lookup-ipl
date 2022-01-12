@@ -4,6 +4,7 @@
 // Headers
 #include "members.h"
 #include "covid_tests.h"
+#include "menus.c"
 
 // Functions
 void program_menu(int option);

@@ -3,6 +3,7 @@
 
 // Constants
 #define MAX_STRING 50
+#define MAX_TESTS 15
 
 // Structures
 typedef struct {

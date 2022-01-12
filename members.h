@@ -13,6 +13,8 @@
 #define SNSNUMBER_MIN 0
 #define SNSNUMBER_MAX 999999999
 
+#include "aux_functions.h"
+
 // Structures
 typedef struct {
     int snsNumber;

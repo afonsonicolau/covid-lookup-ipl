@@ -9,9 +9,10 @@ typedef struct {
     int snsNumber;
     int type;
     int result;
-    int duration;
-    time timeTaken;
+    int timeTaken;
     date dateTaken;
 } diagnosticTest;
+
+//Functions
 
 #endif

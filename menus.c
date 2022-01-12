@@ -4,10 +4,14 @@
 #include <ctype.h>
 #include <locale.h>
 
+#include "menus.h"
+#include "covid_tests.h"
+#include "members.h"
 
 
 int mainMenu() {
     int optionChoosen;
+
 
     do {
         printf("\t**************************************************");
@@ -33,6 +37,8 @@ int mainMenu() {
 }
 
 void program_menu(int option) { // Function that triggers the program menu {
+
+
     switch (option) {
         case 1: // Member Options
 

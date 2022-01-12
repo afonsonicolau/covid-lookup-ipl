@@ -8,6 +8,7 @@
 #include "aux_functions.h"
 #include "aux_functions.c"
 #include "menus.h"
+#include "menus.c"
 
 // Members Header
 #include "members.h"
@@ -20,17 +21,16 @@ communityMember readNewMemberInfo() {
     data.birthDate = readDate();
     data.vaccinationState = readInt("Vaccination State", MAX_FALSE, MAX_TRUE);
     data.confinmentState = readInt("Confinment State", MAX_FALSE, MAX_TRUE);
-
     data.memberRole = 0;
 
     return data;
 }
 
 int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int snsNumber) {
-    int i;
+    int i = 0;
     int position = -1;
 
-    for (i = 0; i < quantity; i++) {
+    for (; i < quantity; i++) {
 
         if (arrayMember[i].snsNumber == snsNumber) {
             position = i;
@@ -41,21 +41,21 @@ int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int sns
     return position;
 }
 
-void createMember(communityMember arrayMember[MAX_MEMBERS], int quantity) {
+void createMember(communityMember arrayMember[MAX_MEMBERS], int *quantity) {
     int position;
     communityMember infoMember;
 
-    if (quantity == MAX_MEMBERS) {
+    if (*quantity == MAX_MEMBERS) {
         printf("You can´t create more community members!");
     }
     else {
         infoMember = readNewMemberInfo();
 
-        position = searchMember(arrayMember, quantity, infoMember.snsNumber);
+        position = searchMember(arrayMember, *quantity, infoMember.snsNumber);
 
         if (position == -1) {
-            arrayMember[quantity] = infoMember;
-            quantity++;
+            arrayMember[*quantity] = infoMember;
+            *quantity++;
 
             printf("\n\tA new member was created, redirecting to main menu...");
         }
@@ -63,14 +63,14 @@ void createMember(communityMember arrayMember[MAX_MEMBERS], int quantity) {
             printf("\n\tThis member is already registered, redirecting to main menu...");
         }
 
-        mainMenu(arrayMember, quantity);
+        mainMenu(arrayMember, *quantity);
     }
 }
 
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity) {
     int i = 0;
-
-    printf("Listing Members...");
+    printf("\n\n\n%d", quantity);
+    printf("\n\tListing Members...");
     for (; i < quantity; i++) {
         printf("\n\n\tSNS Number: %d", arrayMember[i].snsNumber);
         printf("\n\tName: %s", arrayMember[i].name);

@@ -4,10 +4,9 @@
 #include <ctype.h>
 #include <locale.h>
 
-// Files
+// Files & Headers
 #include "members.h"
 #include "members.c"
-#include "covid_tests.h"
 
 // Menus Headers
 #include "menus.h"
@@ -81,10 +80,10 @@ void programMenu(communityMember arrayMember[MAX_MEMBERS], int quantity, int opt
 void memberPaths(communityMember arrayMember[MAX_MEMBERS], int quantity, int option) {
     switch (option) {
         case 1: // Create Member 
-            createMember(arrayMember, quantity);
+            createMember(arrayMember, &quantity);
             break;
         case 2: // List Member 
-            //listMembers();
+            listMembers(arrayMember, quantity);
             break;
         case 3: // Update Member 
             

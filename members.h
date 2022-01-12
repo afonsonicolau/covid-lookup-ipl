@@ -29,7 +29,7 @@ typedef struct {
 // Functions
 communityMember readNewMemberInfo();
 int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int number);
-void createMember(communityMember arrayMember[MAX_MEMBERS], int quantity);
+void createMember(communityMember arrayMember[MAX_MEMBERS], int *quantity);
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity);
 
 #endif

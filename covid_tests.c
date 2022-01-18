@@ -23,14 +23,14 @@ diagnosticTest readTests()
 }
 
 
-int searchTests(diagnosticTest arrayMember[], int quantity, int snsNumber)
+int searchTests(diagnosticTest arraytest[], int quantity, int snsNumber)
 {
     int i;
     int position = -1;
 
     for (i = 0; i < quantity; i++)
     {
-        if (arrayMember[i].snsNumber == snsNumber)
+        if (arraytest[i].snsNumber == snsNumber)
         {
             position = i;
             i = quantity;
@@ -40,14 +40,14 @@ int searchTests(diagnosticTest arrayMember[], int quantity, int snsNumber)
     return position;
 }
 
-diagnosticTest *createTests(diagnosticTest *vTest, int *number)
+diagnosticTest *createTests(diagnosticTest *arraytest, int *number)
 {
     diagnosticTest *pTest, data;
     int pos;
 
     readFromMember(&data);
-    pTest = vTest;
-    pos = searchTests(vTest, *number, data.snsNumber);
+    pTest = arraytest;
+    pos = searchTests(arraytest, *number, data.snsNumber);
 
     if (pos != -1)
     {
@@ -55,76 +55,24 @@ diagnosticTest *createTests(diagnosticTest *vTest, int *number)
     }
     else
     {
-        vTest = realloc(vTest, (*number + 1) * sizeof(diagnosticTest));
+        arraytest = realloc(arraytest, (*number + 1) * sizeof(diagnosticTest));
 
-        if (vTest == NULL)
+        if (arraytest == NULL)
         {
             printf("Error - Impossible to register a test!");
-            vTest = pTest;
+            arraytest = pTest;
         }
         else
         {
-            vTest[*number] = data;
+            arraytest[*number] = data;
             (*number)++;
         }
     }
 
-    return vTest;
+    return arraytest;
 }
 
-diagnosticTest *deleteTest(diagnosticTest *vTest, int *number, int snsNumber)
-{
-    diagnosticTest *pTest, data;
-    int pos, i;
-
-    pTest = vTest;
-
-    if (*number != 0)
-    {
-        pos = searchTests(vTest, *number, snsNumber);
-        if (pos == -1)
-        {
-            printf("This test doesn´t exist!");
-        }
-        else
-        {
-            for (i = 0; i < *number - 1; i++)
-            {
-                vTest[i] = vTest[i + 1];
-            }
-            vTest = realloc(vTest, (*number - 1) * sizeof(diagnosticTest));
-
-            if (vTest == NULL && (*number - 1) != 0)
-            {
-                printf("Error on allocating the memory ");
-                vTest = pTest;
-            }
-            (*number)--;
-        }
-    }
-
-    return vTest;
-}
-
-void writeOnBin(diagnosticTest *vTest, int *number)
-{
-    FILE *file;
-
-    file = fopen("diagnosticTest.dat", "wb");
-
-    if (file == NULL)
-    {
-        printf("Impossible to open the file");
-    }
-    else
-    {
-        fwrite(&number, sizeof(int), 1, file);
-        fwrite(vTest, sizeof(diagnosticTest), number, file);
-        fclose(file);
-    }
-}
-
-diagnosticTest *readBin(diagnosticTest *vTest, int *number)
+diagnosticTest *readBin(diagnosticTest *arraytest, int *number)
 {
     FILE *file;
 
@@ -137,23 +85,38 @@ diagnosticTest *readBin(diagnosticTest *vTest, int *number)
     else
     {
         fread(&(*number), sizeof(int), 1, file);
-        vTest = realloc(vTest, (*number) * sizeof(diagnosticTest));
+        arraytest = realloc(arraytest, (*number) * sizeof(diagnosticTest));
 
-        if (vTest == NULL && *number != 0)
+        if (arraytest == NULL && *number != 0)
         {
             printf("Error allocating memory!");
             *number = 0;
         }
         else
         {
-            fread(vTest, sizeof(diagnosticTest), *number, file);
+            fread(arraytest, sizeof(diagnosticTest), *number, file);
         }
         fclose(file);
     }
-    return vTest;
+    return arraytest;
 }
 
-void writeOnFile(diagnosticTest *vFunc, int number)
+int searchBySNS(diagnosticTest arraytest[], int number, int snsNumber){
+    int i, pos;
+
+    pos =-1;
+
+    for (i = 0; i < number; i++)
+    {
+        if(strcmp(arraytest[i].snsNumber, snsNumber) == 0){
+            pos = i;
+            i=number;
+        }
+    }
+    return pos;
+}
+
+void writeOnFile(diagnosticTest *arraytest, int number)
 {
     FILE *file;
     int i;
@@ -168,10 +131,10 @@ void writeOnFile(diagnosticTest *vFunc, int number)
         fprintf(file, "Diagnostic Test =%d \n", number);
         for (i = 0; i < number; i++)
         {
-            fprintf(file, "%d \t", vFunc[i].snsNumber);
-            fprintf(file, "%d\n", vFunc[i].type);
-            fprintf(file, "%d \t", vFunc[i].result);
-            fprintf(file, "%d \t", vFunc[i].timeTaken);
+            fprintf(file, "%d \t", arraytest[i].snsNumber);
+            fprintf(file, "%d\n", arraytest[i].type);
+            fprintf(file, "%d \t", arraytest[i].result);
+            fprintf(file, "%d \t", arraytest[i].timeTaken);
         }
         fclose(file);
     }

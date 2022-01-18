@@ -21,5 +21,6 @@ diagnosticTest *deleteTest(diagnosticTest *vTest, int *number, int snsNumber);
 void writeOnBin(diagnosticTest *vTest, int *number);
 diagnosticTest *readBin(diagnosticTest *vTest, int *number);
 void writeOnFile(diagnosticTest *vFunc, int number);
+int searchBySNS(diagnosticTest arraytest[], int number, int snsNumber);
 
 #endif

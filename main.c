@@ -16,7 +16,7 @@ int main(){
     int quantity = 0;
     communityMember members[MAX_MEMBERS];
 
-    mainMenu();
+    mainMenu(members, quantity);
 
     return 0;
 }

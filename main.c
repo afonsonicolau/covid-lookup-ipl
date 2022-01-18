@@ -11,16 +11,12 @@
 #include "menus.h"
 
 // Main function
-int main() {
-    int totalTests = 0;
+int main(){
+
     int quantity = 0;
     communityMember members[MAX_MEMBERS];
-    diagnosticTest *tests;
-    tests = NULL;
 
+    mainMenu();
 
-    mainMenu(members, quantity);
-
-    free(tests);
     return 0;
 }

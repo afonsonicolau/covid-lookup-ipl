@@ -9,7 +9,8 @@
 #include "members.h"
 #include "covid_tests.h"
 
-diagnosticTest readTests() {
+diagnosticTest readTests()
+{
     diagnosticTest tests;
 
     tests.snsNumber = readInt("SNS number: ", SNSNUMBER_MIN, SNSNUMBER_MAX);
@@ -21,12 +22,16 @@ diagnosticTest readTests() {
     return tests;
 }
 
-int searchTests(diagnosticTest arrayMember[], int quantity, int snsNumber) {
+
+int searchTests(diagnosticTest arrayMember[], int quantity, int snsNumber)
+{
     int i;
     int position = -1;
 
-    for (i = 0; i < quantity; i++) {
-        if (arrayMember[i].snsNumber == snsNumber) {
+    for (i = 0; i < quantity; i++)
+    {
+        if (arrayMember[i].snsNumber == snsNumber)
+        {
             position = i;
             i = quantity;
         }
@@ -35,7 +40,8 @@ int searchTests(diagnosticTest arrayMember[], int quantity, int snsNumber) {
     return position;
 }
 
-diagnosticTest *createTests(diagnosticTest *vTest, int *number) {
+diagnosticTest *createTests(diagnosticTest *vTest, int *number)
+{
     diagnosticTest *pTest, data;
     int pos;
 
@@ -43,17 +49,21 @@ diagnosticTest *createTests(diagnosticTest *vTest, int *number) {
     pTest = vTest;
     pos = searchTests(vTest, *number, data.snsNumber);
 
-    if (pos != -1) {
+    if (pos != -1)
+    {
         printf("Test already done!");
     }
-    else {
+    else
+    {
         vTest = realloc(vTest, (*number + 1) * sizeof(diagnosticTest));
 
-        if (vTest == NULL) {
+        if (vTest == NULL)
+        {
             printf("Error - Impossible to register a test!");
             vTest = pTest;
         }
-        else {
+        else
+        {
             vTest[*number] = data;
             (*number)++;
         }
@@ -62,24 +72,30 @@ diagnosticTest *createTests(diagnosticTest *vTest, int *number) {
     return vTest;
 }
 
-diagnosticTest *deleteTest(diagnosticTest *vTest, int *number) {
+diagnosticTest *deleteTest(diagnosticTest *vTest, int *number, int snsNumber)
+{
     diagnosticTest *pTest, data;
     int pos, i;
 
     pTest = vTest;
 
-    if (*number != 0) {
-        pos = searchTests(vTest, *number, number);
-        if (pos == -1) {
+    if (*number != 0)
+    {
+        pos = searchTests(vTest, *number, snsNumber);
+        if (pos == -1)
+        {
             printf("This test doesn´t exist!");
         }
-        else {
-            for (i = 0; i < *number - 1; i++) {
+        else
+        {
+            for (i = 0; i < *number - 1; i++)
+            {
                 vTest[i] = vTest[i + 1];
             }
             vTest = realloc(vTest, (*number - 1) * sizeof(diagnosticTest));
 
-            if (vTest == NULL && (*number - 1) != 0) {
+            if (vTest == NULL && (*number - 1) != 0)
+            {
                 printf("Error on allocating the memory ");
                 vTest = pTest;
             }
@@ -90,32 +106,68 @@ diagnosticTest *deleteTest(diagnosticTest *vTest, int *number) {
     return vTest;
 }
 
-void writeOnBin(diagnosticTest *vTest, int *number) {
+void writeOnBin(diagnosticTest *vTest, int *number)
+{
     FILE *file;
 
     file = fopen("diagnosticTest.dat", "wb");
 
-    if (file == NULL) {
+    if (file == NULL)
+    {
         printf("Impossible to open the file");
     }
-    else {
+    else
+    {
         fwrite(&number, sizeof(int), 1, file);
         fwrite(vTest, sizeof(diagnosticTest), number, file);
         fclose(file);
     }
 }
 
-void writeOnFile(diagnosticTest *vFunc, int number) {
+diagnosticTest *readBin(diagnosticTest *vTest, int *number)
+{
+    FILE *file;
+
+    file = fopen("diagnosticTest.dat", "rb");
+
+    if (file == NULL)
+    {
+        printf("Impossible to open the file!");
+    }
+    else
+    {
+        fread(&(*number), sizeof(int), 1, file);
+        vTest = realloc(vTest, (*number) * sizeof(diagnosticTest));
+
+        if (vTest == NULL && *number != 0)
+        {
+            printf("Error allocating memory!");
+            *number = 0;
+        }
+        else
+        {
+            fread(vTest, sizeof(diagnosticTest), *number, file);
+        }
+        fclose(file);
+    }
+    return vTest;
+}
+
+void writeOnFile(diagnosticTest *vFunc, int number)
+{
     FILE *file;
     int i;
     file = fopen("diagnosticTest.txt", "w");
 
-    if (file == NULL) {
+    if (file == NULL)
+    {
         printf("Impossible to open the file");
     }
-    else {
+    else
+    {
         fprintf(file, "Diagnostic Test =%d \n", number);
-        for (i = 0; i < number; i++) {
+        for (i = 0; i < number; i++)
+        {
             fprintf(file, "%d \t", vFunc[i].snsNumber);
             fprintf(file, "%d\n", vFunc[i].type);
             fprintf(file, "%d \t", vFunc[i].result);

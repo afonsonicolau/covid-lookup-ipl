@@ -22,7 +22,6 @@ diagnosticTest readTests()
     return tests;
 }
 
-
 int searchTests(diagnosticTest arraytest[], int quantity, int snsNumber)
 {
     int i;
@@ -43,10 +42,10 @@ int searchTests(diagnosticTest arraytest[], int quantity, int snsNumber)
 diagnosticTest *createTests(diagnosticTest *arraytest, int *number)
 {
     diagnosticTest *pTest, data;
-    int pos;
+    int pos, snsNumber;
 
-    readFromMember(&data);
     pTest = arraytest;
+    data = readTests();
     pos = searchTests(arraytest, *number, data.snsNumber);
 
     if (pos != -1)
@@ -101,16 +100,17 @@ diagnosticTest *readBin(diagnosticTest *arraytest, int *number)
     return arraytest;
 }
 
-int searchBySNS(diagnosticTest arraytest[], int number, int snsNumber){
+int searchBySNS(diagnosticTest arraytest[], int number, int snsNumber)
+{
     int i, pos;
-
-    pos =-1;
+    pos = -1;
 
     for (i = 0; i < number; i++)
     {
-        if(strcmp(arraytest[i].snsNumber, snsNumber) == 0){
+        if (arraytest[i].snsNumber == snsNumber)
+        {
             pos = i;
-            i=number;
+            i = number;
         }
     }
     return pos;

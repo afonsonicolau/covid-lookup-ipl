@@ -9,7 +9,7 @@
 #include "members.h"
 
 
-communityMember readFromMember()
+communityMember readFromMember(void)
 {
     communityMember data;
 
@@ -40,7 +40,7 @@ int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int sns
     return position;
 }
 
-int createMember(communityMember arrayMember[MAX_MEMBERS], int quantity) {
+void createMember(communityMember arrayMember[MAX_MEMBERS], int quantity) {
     char vaccination;
     date date_member;
     int position;

@@ -15,8 +15,10 @@ int main(){
 
     int quantity = 0;
     communityMember members[MAX_MEMBERS];
+    diagnosticTest *tests = NULL;
 
-    mainMenu(members, quantity);
+    mainMenu(members, tests,quantity);
 
+    free(tests);
     return 0;
 }

@@ -2,9 +2,11 @@
 #define MENUS_H_INCLUDED
 
 #include "menus.c"
+
 // Functions
-void mainMenu(communityMember arrayMember[MAX_MEMBERS], int quantity);
-void memberMenu(communityMember arrayMember[MAX_MEMBERS], int quantity);
-void programMenu(communityMember arrayMember[MAX_MEMBERS], int quantity, int option);
-void memberPaths(communityMember arrayMember[MAX_MEMBERS], int quantity, int option);
+void programMenu(diagnosticTest *arrayTest, int quantity, int option);
+void testsPaths(diagnosticTest *arrayTest, int quantity, int option);
+void mainMenu(communityMember arrayMember[MAX_MEMBERS], diagnosticTest *arrayTest, int quantity);
+void testsMenu(diagnosticTest *arrayTest, int quantity);
+
 #endif

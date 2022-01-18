@@ -1,8 +1,6 @@
 #ifndef MEMBERS_H_INCLUDED
 #define MEMBERS_H_INCLUDED
 
-#include "aux_functions.h"
-
 // Constants
 #define MAX_MEMBERS 200
 #define MAX_STRING 50
@@ -30,7 +28,7 @@ typedef struct {
 // Functions
 int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int number);
 communityMember readFromMember();
-int createMember(communityMember arrayMember[MAX_MEMBERS], int quantity);
+void createMember(communityMember arrayMember[MAX_MEMBERS], int quantity);
 int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int number);
 
 #endif

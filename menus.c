@@ -8,6 +8,7 @@
 #include "members.h"
 #include "aux_functions.h"
 #include "covid_tests.h"
+#include "vaccination_functions.h"
 
 // Menus Headers
 #include "menus.h"
@@ -101,13 +102,96 @@ void testsMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBE
     mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
 }
 
+void vaccinationMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
+    int optionChoosen;
+    int snsNumber = 0;
+    int vaccinatedQuantity = vaccinatedMembers(arrayMember, membersQuantity);
+
+    do {
+        printf("\t**************************************************");
+        printf("\n\t** \t\t\t\t\t\t**");
+        printf("\n \t** \t\tCLS - Vaccination Options \t\t**");
+        printf("\n\t** \t\t\t\t\t\t**");
+        printf("\n\t**************************************************");
+
+        printf("\n\tMembers Vaccinated: %d", vaccinatedQuantity);
+
+        printf("\n\n\t1. Register Vaccination for Member (FIRST dose)");
+        printf("\n\t2. Update Member Vaccination State (Remaining doses)");
+        printf("\n\t3. Return");
+
+        optionChoosen = readInt("\n\n\tOption", 1, 3);
+    } while (optionChoosen < 1 &&  optionChoosen > 3);
+
+    switch (optionChoosen) {
+        case 1: // Register Vaccine
+            registerVaccination(arrayMember, membersQuantity);
+            system("cls");
+            break;
+        case 2: // Update Vaccine
+            updateVaccination(arrayMember, membersQuantity);
+            system("cls");
+            break;
+        case 3:
+            system("cls");
+            break;
+        default:
+            break;
+    }
+
+    mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
+}
+
+void confinmentMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
+    int optionChoosen;
+    int snsNumber = 0;
+    int confinedQuantity = confinedQuantity(arrayMember, membersQuantity);
+
+    do {
+        printf("\t**************************************************");
+        printf("\n\t** \t\t\t\t\t\t**");
+        printf("\n \t** \t\tCLS - Test Options \t\t**");
+        printf("\n\t** \t\t\t\t\t\t**");
+        printf("\n\t**************************************************");
+
+        printf("\n\tMembers Confined: %d", vaccinatedQuantity);
+
+        printf("\n\n\t1. Register Vaccination for Member (FIRST dose)");
+        printf("\n\t2. Update Member Vaccination State (Remaining doses)");
+        printf("\n\t3. Return");
+
+        optionChoosen = readInt("\n\n\tOption", 1, 3);
+    } while (optionChoosen < 1 &&  optionChoosen > 3);
+
+    switch (optionChoosen) {
+        case 1: // Register Vaccine
+            registerVaccination(arrayMember, membersQuantity);
+            system("cls");
+            break;
+        case 2: // Update Vaccine
+            updateVaccination(arrayMember, membersQuantity);
+            system("cls");
+            break;
+        case 3:
+            system("cls");
+            break;
+        default:
+            break;
+    }
+
+    mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
+}
+
+
 void redirectingMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity, int option) {
+    system("cls");
+
     switch (option) {
         case 1: // Member Menu
             membersMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
             break;
         case 2: // Vaccination Menu
-            printf("Ainda nao");
+            vaccinationMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
             break;
         case 3: // Test Menu
             testsMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
@@ -149,6 +233,5 @@ void mainMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBER
         optionChoosen = readInt("\n\n\tOption", 1, 5);
     } while (optionChoosen < 1 &&  optionChoosen > 5);
 
-    system("cls");
     redirectingMenu(covidTests, arrayMember, membersQuantity, testsQuantity, optionChoosen);
 }

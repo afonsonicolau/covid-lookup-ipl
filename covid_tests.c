@@ -8,22 +8,28 @@
 #include "aux_functions.h"
 #include "covid_tests.h"
 #include "menus.h"
+#include "members.h"
 
-diagnosticTest readTests() {
+diagnosticTest getTestInfo() {
     diagnosticTest test;
 
-    test.snsNumber = readInt("SNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
+    test.id = rand();
     test.type = readInt("Test type (1 - PCR  || 2 - Antigen)", 1, 2);
-    test.result = 0; /* 1 - Positive || 2 - Negative || 3 - Undefined */
-    test.timeTaken = readTime("Time taken to do the test");
-    test.dateTaken = readDate("When was the test done");
+    test.result = 0; /* 0 - No Result || 1 - Positive || 2 - Negative || 3 - Undefined */
+    test.timeTaken = readTime("Whats the time the test will be performed");
+    test.dateTaken = readDate("To when should the test be scheduled");
 
     return test;
 }
 
+// Search a test by associated SNS Number
 int searchTests(diagnosticTest covidTests[], int quantity, int snsNumber) {
     int i;
     int position = -1;
+
+    if (snsNumber == 0) {
+        snsNumber = readInt("\n\tSNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
+    }
 
     for (i = 0; i < quantity; i++) {
         if (covidTests[i].snsNumber == snsNumber) {
@@ -34,36 +40,49 @@ int searchTests(diagnosticTest covidTests[], int quantity, int snsNumber) {
     return position;
 }
 
-diagnosticTest *createTests(diagnosticTest *covidTests, int *quantity) {
-    diagnosticTest *pTest, data;
+diagnosticTest *createTests(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int *testsQuantity) {
+    diagnosticTest newData;
     int pos;
 
-    pTest = covidTests;
-    data = readTests();
-    pos = searchTests(covidTests, *quantity, data.snsNumber);
+    newData.snsNumber = readInt("SNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
+    pos = searchMember(arrayMember, membersQuantity, newData.snsNumber);
 
-    if (pos != -1) {
-        printf("Test already done!");
+    if (pos == -1) {
+        printf("\n\tMember doesnt exist...");
+        pressToRedirect();
+        return;
+    }
+
+    diagnosticTest *testBackup;
+
+    testBackup = covidTests;
+    newData = getTestInfo();
+
+    covidTests = realloc(covidTests, (*testsQuantity + 1) * sizeof(diagnosticTest));
+
+    if (covidTests == NULL) {
+        printf("Error - Impossible to register a test!");
+        covidTests = testBackup;
     }
     else {
-        covidTests = realloc(covidTests, (*quantity+1)*sizeof(diagnosticTest));
-        if (covidTests == NULL) {
-            printf("Error - Impossible to register a test!");
-            covidTests = pTest;
-        }
-        else {
-            covidTests[*quantity] = data;
-            (*quantity)++;
-        }
+        covidTests[*testsQuantity] = newData;
+        (*testsQuantity)++;
+        printf("Test was scheduled to %d/%d/%d, at %d:%d.",  newData.dateTaken.day, newData.dateTaken.month, newData.dateTaken.year,
+                                                             newData.timeTaken.hour, newData.timeTaken.minute);
     }
+
+    pressToRedirect();
+
     return covidTests;
 }
 
 void listTests(diagnosticTest *covidTests, int quantity) {
-
+    // Checks if any test exists
     if(quantity == 0) {
         printf("\n\tThere is no tests...\n");
-        errorRedirect();
+
+        pressToRedirect();
+
         return;
     }
 
@@ -71,7 +90,9 @@ void listTests(diagnosticTest *covidTests, int quantity) {
     printf("\n\tListing %d Tests...\n", quantity);
 
     for (; i < quantity; i++) {
+        printf("\n\tTest Designation: %d", covidTests[i].id);
         printf("\n\tSNS Number: %d", covidTests[i].snsNumber);
+        // Gets type of test
         if (covidTests[i].type == 1) printf("\n\tType: PCR");
         else if (covidTests[i].type == 2) printf("\n\tType: Antigen");
         else printf("\n\tSomething went wrong, can't read test type.");
@@ -79,7 +100,7 @@ void listTests(diagnosticTest *covidTests, int quantity) {
         printf("\n\tDate Taken: %d/%d/%d", covidTests[i].dateTaken.day, covidTests[i].dateTaken.month, covidTests[i].dateTaken.year);
         printf("\n\tTime Taken: %d:%d", covidTests[i].timeTaken.hour, covidTests[i].timeTaken.minute);
 
-
+        // Gets test result
         if (covidTests[i].result == 0) printf("\n\tResult: Not yet performed");
         else if (covidTests[i].result == 1) printf("\n\tResult: Positive");
         else if (covidTests[i].result == 2) printf("\n\tResult: Negative");
@@ -87,34 +108,33 @@ void listTests(diagnosticTest *covidTests, int quantity) {
         else printf("\n\tSomething went wrong, can't read test result.");
 
     }
-    errorRedirect();
+
+    pressToRedirect();
 }
 
 void updateTests(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
-    int snsNumber = 0;
     int memberExists = 0;
+    memberExists = searchMember(arrayMember, membersQuantity, 0);
 
-    snsNumber = readInt("\n\tSNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
-
-    memberExists = searchBySNS(arrayMember, membersQuantity, snsNumber);
-
+    // Cheks if member exists, if it doesn't it returns to main menu after a key is pressed
     if(memberExists == -1) {
         printf("\n\tThere are no members with given SNS Number");
-        errorRedirect();
+        pressToRedirect();
+        return;
     }
 
     int position;
     int testExists = 0;
 
-    testExists = searchTests(covidTests, testsQuantity, snsNumber);
+    testExists = searchTests(covidTests, testsQuantity, 0);
 
     if(testExists == -1) {
         printf("\n\tThere are no test scheduled with given SNS Number");
-        errorRedirect();
+        pressToRedirect();
     }
     else {
-        covidTests[testExists].dateTaken = readDate("When was the test done");
-        printf("\n\tDate was sucessful changed!");
+        covidTests[testExists].dateTaken = readDate("Update the test date");
+        printf("\n\tDate was sucessfully changed!");
     }
 }
 
@@ -161,6 +181,7 @@ diagnosticTest *readBin(diagnosticTest *covidTests, int *number) {
         free(covidTests);
         *number = 0;
     }
+
     return covidTests;
 }
 
@@ -188,6 +209,7 @@ int scheduledTests(diagnosticTest *covidTests, int quantity) {
             scheduledTests++;
         }
     }
+
     return scheduledTests;
 }
 
@@ -201,19 +223,6 @@ int performedTests(diagnosticTest *covidTests, int quantity) {
             performedTests++;
         }
     }
+
     return performedTests;
 }
-
-int searchBySNS(communityMember arrayMember[MAX_MEMBERS] , int quantity, int snsNumber) {
-    int i;
-    int position = -1;
-
-    for (i = 0; i < quantity; i++) {
-        if (arrayMember[i].snsNumber == snsNumber) {
-            position = i;
-        }
-    }
-
-    return position;
-}
-

@@ -27,10 +27,11 @@ typedef struct {
 
 // Functions
 communityMember getMemberInfo();
-int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int number);
+int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int snsNumber);
 void createMember(communityMember arrayMember[MAX_MEMBERS], int *quantity);
 void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity);
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity);
 int vaccinatedMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuantity);
+int confinedMembersMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuantity);
 
 #endif

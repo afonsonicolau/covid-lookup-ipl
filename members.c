@@ -17,18 +17,13 @@ communityMember getMemberInfo() {
     data.snsNumber = readInt("SNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
     readString("Member Name", data.name, MAX_STRING);
     data.birthDate = readDate("Date of Birth");
-    data.vaccinationState = readInt("Vaccination State (0 - No Vaccine || 1 - 1 Dose || 2 - 2 Dose || 3 - 3 Dose)", 0, 3);
-    data.confinmentState = readInt("Confinment State (0 - Not Confined || 1 - Quarantine || 2 - P. Isolation)", 0, 2);
-    data.memberRole = readInt("Member Role State (0 - Student || 1 - Teacher || 2 - Technician)", 0, 2);
+    data.memberRole = readInt("Member Role (0 - Student || 1 - Teacher || 2 - Technician)", 0, 2);
 
-    if (data.vaccinationState > 0) {
-        data.lastVaccine = readDate("Last Vaccine Taken");
-    }
-    else {
-        data.lastVaccine.year = 0;
-        data.lastVaccine.month = 0;
-        data.lastVaccine.day = 0;
-    }
+    data.vaccinationState = 0;
+    data.confinmentState = 0;
+    data.lastVaccine.year = 0;
+    data.lastVaccine.month = 0;
+    data.lastVaccine.day = 0;
 
     return data;
 }
@@ -37,8 +32,11 @@ int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int sns
     int i = 0;
     int position = -1;
 
-    for (; i < quantity; i++) {
+    if (snsNumber == 0) {
+        snsNumber = readInt("\n\tSNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
+    }
 
+    for (; i < quantity; i++) {
         if (arrayMember[i].snsNumber == snsNumber) {
             position = i;
             i = quantity;
@@ -49,15 +47,16 @@ int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int sns
 }
 
 void createMember(communityMember arrayMember[MAX_MEMBERS],int *quantity) {
-    int position;
-    communityMember infoMember;
+
 
     if (*quantity == MAX_MEMBERS) {
         printf("\n\tYou can´t create more community members!");
     }
     else {
-        infoMember = getMemberInfo();
+        int position;
+        communityMember infoMember;
 
+        infoMember = getMemberInfo();
         position = searchMember(arrayMember, *quantity, infoMember.snsNumber);
 
         if (position == -1) {
@@ -73,32 +72,31 @@ void createMember(communityMember arrayMember[MAX_MEMBERS],int *quantity) {
 }
 
 void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity) {
-    int position;
-    communityMember infoMember;
-
-    if (quantity <= 0) {
+    if (membersQuantity <= 0) {
         printf("\n\tIts impossible to update members when they dont exist!");
     }
     else {
-        infoMember = getMemberInfo();
-
-        position = searchMember(arrayMember, quantity, infoMember.snsNumber);
+        int position = searchMember(arrayMember, membersQuantity, 0);
 
         if (position != -1) {
-            arrayMember[quantity] = infoMember;
-            (quantity)++;
+            printf("\n\tEditing %s:\n", arrayMember[position].name);
+            arrayMember[position].memberRole = readInt("New Member Role (0 - Student || 1 - Teacher || 2 - Technician)", 0, 2);
+            arrayMember[position].birthDate = readDate("Date of Birth");
 
-            printf("\n\tA new member was created, redirecting to main menu...\n\n");
+            printf("\n\tMember confinment state was updated...\n\n");
         }
         else {
-            printf("\n\tThis member is already registered, redirecting to main menu...\n\n");
+            printf("\n\tThis member doesnt exist...\n\n");
         }
     }
+
+    pressToRedirect();
 }
 
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity) {
-    if(quantity == 0) {
-        printf("\n\tThere is no members...\n");
+    if (quantity <= 0) {
+        printf("\n\tIts impossible to update members when they dont exist!");
+        pressToRedirect();
         return;
     }
 
@@ -111,23 +109,44 @@ void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity) {
         printf("\n\tDate of Birth: %d/%d/%d", arrayMember[i].birthDate.day, arrayMember[i].birthDate.month, arrayMember[i].birthDate.year);
 
         // Reads memberRole value and associates it's description to it
-        if (arrayMember[i].memberRole == 0) printf("\n\tRole: Student");
-        else if (arrayMember[i].memberRole == 1) printf("\n\tRole: Teacher");
-        else if (arrayMember[i].memberRole == 2) printf("\n\tRole: Technician");
-        else printf("\n\tSomething went wrong, can't read member role.");
+        switch (arrayMember[i].memberRole) {
+            case 0:
+                printf("\n\tRole: Student");
+                break;
+            case 1:
+                printf("\n\tRole: Teacher");
+                break;
+            case 2:
+                printf("\n\tRole: Technician");
+                break;
+            default:
+                printf("\n\tSomething went wrong, can't read member role.");
+                break;
+        }
 
         // Get member vaccionation state and verify it's value in order to show correct result to user
-        if (arrayMember[i].vaccinationState == 0) printf("\n\tThis member is NOT vaccinated");
-        else if (arrayMember[i].vaccinationState == 1) printf("\n\tThis member has the FIRST vaccine dose");
-        else if (arrayMember[i].vaccinationState == 2) printf("\n\tThis member has the SECOND vaccine dose");
-        else if (arrayMember[i].vaccinationState == 3) printf("\n\tThis member has the THIRD vaccine dose");
-        else printf("\n\tSomething went wrong, can't read member vaccination state.");
+        if (arrayMember[i].vaccinationState == 0) {
+            printf("\n\tThis member is NOT vaccinated");
+        }
+        else {
+            printf("\n\tThis member has the %d vaccine dose", arrayMember[i].vaccinationState);
+        }
 
         // Get member confinment state and verify it's value in order to show correct result to user
-        if (arrayMember[i].confinmentState == 0) printf("\n\tThis member is NOT confined or quaratined");
-        else if (arrayMember[i].confinmentState == 1) printf("\n\tThis member IS quarantined");
-        else if (arrayMember[i].confinmentState == 1) printf("\n\tThis members IS in p. isolation");
-        else printf("\n\tSomething went wrong, can't read member confinment state.");
+         switch (arrayMember[i].confinmentState) {
+            case 0:
+                printf("\n\tThis members is NOT quarantine/p. isolation");
+                break;
+            case 1:
+                printf("\n\tThis member IS quarantined");
+                break;
+            case 2:
+                printf("\n\tThis members IS in p. isolation");
+                break;
+            default:
+                printf("\n\tSomething went wrong, can't read member confinment state.");
+                break;
+        }
     }
 }
 
@@ -139,9 +158,24 @@ int vaccinatedMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuant
     for (; i < membersQuantity; i++) {
         // Checks if member has 1º, 2º or 3º vaccine dose
         if (arrayMember[i].vaccinationState > 0) {
-            vaccinatedQuantity = vaccinatedQuantity + 1;
+            vaccinatedQuantity++;
         }
     }
 
     return vaccinatedQuantity;
+}
+
+// Get confined members
+int confinedMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuantity) {
+    int i = 0;
+    int confinedQuantity = 0;
+
+    for (; i < membersQuantity; i++) {
+        // Checks if member not confined (0) or in quaratine/isolation (1/2)
+        if (arrayMember[i].confinmentState > 0) {
+            confinedQuantity++;
+        }
+    }
+
+    return confinedQuantity;
 }

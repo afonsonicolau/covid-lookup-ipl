@@ -24,5 +24,6 @@ int readInt(char message[MAX_STRING], int min, int max);
 void readString(char message[MAX_STRING], char arrayChar[MAX_STRING], int maxChar);
 date readDate(char message[MAX_STRING]);
 time readTime(char message[MAX_STRING]);
+void errorRedirect();
 
 #endif

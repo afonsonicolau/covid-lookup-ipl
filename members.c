@@ -82,11 +82,11 @@ void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity) {
     else {
         infoMember = getMemberInfo();
 
-        position = searchMember(arrayMember, *quantity, infoMember.snsNumber);
+        position = searchMember(arrayMember, quantity, infoMember.snsNumber);
 
         if (position != -1) {
-            arrayMember[*quantity] = infoMember;
-            (*quantity)++;
+            arrayMember[quantity] = infoMember;
+            (quantity)++;
 
             printf("\n\tA new member was created, redirecting to main menu...\n\n");
         }
@@ -97,12 +97,16 @@ void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity) {
 }
 
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity) {
+    if(quantity == 0) {
+        printf("\n\tThere is no members...\n");
+        return;
+    }
+
     int i = 0;
-    printf("\n\n\%d", quantity);
-    printf("\n\tListing Members...");
+    printf("\n\tListing %d Members...\n", quantity);
 
     for (; i < quantity; i++) {
-        printf("\n\n\tSNS Number: %d", arrayMember[i].snsNumber);
+        printf("\n\tSNS Number: %d", arrayMember[i].snsNumber);
         printf("\n\tName: %s", arrayMember[i].name);
         printf("\n\tDate of Birth: %d/%d/%d", arrayMember[i].birthDate.day, arrayMember[i].birthDate.month, arrayMember[i].birthDate.year);
 

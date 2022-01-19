@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <locale.h>
+#include <conio.h>
 
 // Aux functions header
 #include "aux_functions.h"
@@ -134,4 +135,10 @@ time readTime(char message[MAX_STRING]) {
     time_read.minute = readInt("\tInsert a minute (0 to 60)", 0, 60);
 
     return time_read;
+}
+
+void errorRedirect(){
+    printf("\n\tPress any key to return...");
+    while (!kbhit()){}
+    return;
 }

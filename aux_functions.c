@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <locale.h>
-//#include <conio.h>
+#include <conio.h>
 
 // Aux functions header
 #include "aux_functions.h"
@@ -139,6 +139,6 @@ time readTime(char message[MAX_STRING]) {
 
 void pressToRedirect() {
     printf("\n\tPress any key to return...");
-    //while (!kbhit()){}
+    while (!kbhit()){}
     return;
 }

@@ -4,18 +4,19 @@
 #include <ctype.h>
 #include <locale.h>
 
-// Files
+// Headers
 #include "aux_functions.h"
-#include "covid_tests.h"
 #include "menus.h"
-#include "members.h"
+
+// Covid Tests Header
+#include "covid_tests.h"
 
 diagnosticTest getTestInfo() {
     diagnosticTest test;
 
     test.id = rand();
     test.type = readInt("Test type (1 - PCR  || 2 - Antigen)", 1, 2);
-    test.result = 0; /* 0 - No Result || 1 - Positive || 2 - Negative || 3 - Undefined */
+    test.result = 0;
     test.timeTaken = readTime("Whats the time the test will be performed");
     test.dateTaken = readDate("To when should the test be scheduled");
 
@@ -50,7 +51,7 @@ diagnosticTest *createTests(diagnosticTest *covidTests, communityMember arrayMem
     if (pos == -1) {
         printf("\n\tMember doesnt exist...");
         pressToRedirect();
-        return;
+        return covidTests;
     }
 
     diagnosticTest *testBackup;
@@ -123,7 +124,6 @@ void updateTests(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEM
         return;
     }
 
-    int position;
     int testExists = 0;
 
     testExists = searchTests(covidTests, testsQuantity, 0);
@@ -225,4 +225,55 @@ int performedTests(diagnosticTest *covidTests, int quantity) {
     }
 
     return performedTests;
+}
+
+void showStatistics(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
+    printf("\n\tCalculating statistics...");
+
+    int students = 0, teachers = 0, technicians = 0;
+    time averageTestTime;
+    float minutes = 0.0, hours = 0.0;
+    float undefinedTestsPercentage = 0.0; int undefinedTestSum = 0;
+    char memberLessTests[MAX_STRING] = "";
+    int i;
+
+    // Gets member role and distributes it by variables
+    for(i = 0; i < membersQuantity; i++) {
+        switch(arrayMember[i].memberRole) {
+            case 0:
+                students++;
+                break;
+            case 1:
+                teachers++;
+                break;
+            case 2:
+                technicians++;
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Gets time average to perform a test & average undefined tests
+    for(i = 0; i < testsQuantity; i++) {
+        minutes += covidTests[i].timeTaken.minute;
+        hours += covidTests[i].timeTaken.hour;
+
+        // Checks if test result is undefined
+        if (covidTests[i].result == 3) {
+            undefinedTestSum++;
+        }
+    }
+
+    averageTestTime.minute = minutes / testsQuantity;
+    averageTestTime.hour = hours / testsQuantity;
+
+    undefinedTestsPercentage = (float) undefinedTestSum / testsQuantity;
+
+    printf("\n\n\tStatistics calculated, here are the results");
+    printf("\n\n\t\t\tRole Type Quantity");
+    printf("\n\tStudents: %d", students); printf("\tTeachers: %d", teachers); printf("\tTechnicians: %d", technicians);
+
+    printf("\n\n\tAverage time performing a test: %d:%d", averageTestTime.hour, averageTestTime.minute);
+    printf("\n\tAverage of undefined results: %.2f", undefinedTestsPercentage);
 }

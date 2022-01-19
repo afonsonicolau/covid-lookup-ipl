@@ -47,8 +47,6 @@ int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int sns
 }
 
 void createMember(communityMember arrayMember[MAX_MEMBERS],int *quantity) {
-
-
     if (*quantity == MAX_MEMBERS) {
         printf("\n\tYou can´t create more community members!");
     }
@@ -71,7 +69,7 @@ void createMember(communityMember arrayMember[MAX_MEMBERS],int *quantity) {
     }
 }
 
-void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity) {
+void updateMember(communityMember arrayMember[MAX_MEMBERS], int membersQuantity) {
     if (membersQuantity <= 0) {
         printf("\n\tIts impossible to update members when they dont exist!");
     }
@@ -83,7 +81,7 @@ void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity) {
             arrayMember[position].memberRole = readInt("New Member Role (0 - Student || 1 - Teacher || 2 - Technician)", 0, 2);
             arrayMember[position].birthDate = readDate("Date of Birth");
 
-            printf("\n\tMember confinment state was updated...\n\n");
+            printf("\n\tMember data was updated...\n\n");
         }
         else {
             printf("\n\tThis member doesnt exist...\n\n");

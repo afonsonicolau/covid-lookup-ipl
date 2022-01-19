@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 // Headers
 #include "members.h"
 #include "aux_functions.h"

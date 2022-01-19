@@ -93,7 +93,7 @@
 	"covid_tests.h"
 	"menus.h"
 
-1642614616 source:/home/nicolau/ipl/programming/covid-lookup-ipl/aux_functions.c
+1642628052 source:/home/nicolau/ipl/programming/covid-lookup-ipl/aux_functions.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -101,23 +101,22 @@
 	<locale.h>
 	"aux_functions.h"
 
-1642620803 /home/nicolau/ipl/programming/covid-lookup-ipl/aux_functions.h
+1642627756 /home/nicolau/ipl/programming/covid-lookup-ipl/aux_functions.h
 
-1642622787 source:/home/nicolau/ipl/programming/covid-lookup-ipl/covid_tests.c
+1642629705 source:/home/nicolau/ipl/programming/covid-lookup-ipl/covid_tests.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	<locale.h>
 	"aux_functions.h"
-	"covid_tests.h"
 	"menus.h"
-	"members.h"
+	"covid_tests.h"
 
-1642617176 /home/nicolau/ipl/programming/covid-lookup-ipl/members.h
+1642627665 /home/nicolau/ipl/programming/covid-lookup-ipl/members.h
 	"aux_functions.h"
 
-1642621451 /home/nicolau/ipl/programming/covid-lookup-ipl/covid_tests.h
+1642627792 /home/nicolau/ipl/programming/covid-lookup-ipl/covid_tests.h
 	"aux_functions.h"
 	"members.h"
 
@@ -131,11 +130,11 @@
 	"covid_tests.h"
 	"members.h"
 
-1642620857 /home/nicolau/ipl/programming/covid-lookup-ipl/menus.h
+1642626638 /home/nicolau/ipl/programming/covid-lookup-ipl/menus.h
 	"covid_tests.h"
 	"members.h"
 
-1642623341 source:/home/nicolau/ipl/programming/covid-lookup-ipl/members.c
+1642627631 source:/home/nicolau/ipl/programming/covid-lookup-ipl/members.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -145,7 +144,7 @@
 	"menus.h"
 	"members.h"
 
-1642622633 source:/home/nicolau/ipl/programming/covid-lookup-ipl/menus.c
+1642627155 source:/home/nicolau/ipl/programming/covid-lookup-ipl/menus.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -221,15 +220,19 @@
 	"menus.h"
 	"members.h"
 
-1642620628 source:/home/nicolau/ipl/programming/covid-lookup-ipl/vaccination_functions.c
+1642626801 source:/home/nicolau/ipl/programming/covid-lookup-ipl/vaccination_functions.c
+	<stdio.h>
 	"members.h"
 	"aux_functions.h"
 
-1642622402 source:/home/nicolau/ipl/programming/covid-lookup-ipl/confinment_functions.c
+1642626796 source:/home/nicolau/ipl/programming/covid-lookup-ipl/confinment_functions.c
+	<stdio.h>
 	"members.h"
 	"aux_functions.h"
 
-1642617238 /home/nicolau/ipl/programming/covid-lookup-ipl/vaccination_functions.h
+1642627569 /home/nicolau/ipl/programming/covid-lookup-ipl/vaccination_functions.h
+	"members.h"
 
-1642620837 /home/nicolau/ipl/programming/covid-lookup-ipl/confinment_functions.h
+1642627575 /home/nicolau/ipl/programming/covid-lookup-ipl/confinment_functions.h
+	"members.h"
 

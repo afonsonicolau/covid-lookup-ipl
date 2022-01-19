@@ -32,7 +32,8 @@ void membersMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEM
         printf("\n\n\t1. Create Member");
         printf("\n\t2. List Members");
         printf("\n\t3. Update Member");
-        printf("\n\t4. Return");
+        printf("\n\t4. General Statistics");
+        printf("\n\t5. Return");
 
         optionChoosen = readInt("\n\n\tOption", 1, 4);
     } while (optionChoosen < 1 &&  optionChoosen > 4);
@@ -40,12 +41,19 @@ void membersMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEM
     switch (optionChoosen) {
         case 1: // Create Members
             createMember(arrayMember, &membersQuantity);
+            system("cls");
             break;
         case 2: // List Members
             listMembers(arrayMember, membersQuantity);
+            system("cls");
             break;
         case 3: // Update Member
-
+            updateMember(arrayMember, membersQuantity);
+            system("cls");
+            break;
+        case 4: // Show Statistics
+            showStatistics(covidTests, arrayMember, membersQuantity, testsQuantity);
+            system("cls");
             break;
         default:
             system("cls");
@@ -177,7 +185,6 @@ void confinmentMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_
 
     mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
 }
-
 
 void redirectingMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity, int option) {
     system("cls");

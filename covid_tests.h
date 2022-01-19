@@ -31,5 +31,6 @@ int scheduledTests(diagnosticTest *covidTests, int quantity);
 int performedTests(diagnosticTest *covidTests, int quantity);
 void listTests(diagnosticTest *covidTests, int quantity);
 void updateTests(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity);
+void showStatistics(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity);
 
 #endif

@@ -6,7 +6,6 @@
 
 // Constants
 #define MAX_MEMBERS 200
-#define MAX_STRING 50
 
 #define MAX_TRUE 1
 #define MAX_FALSE 0
@@ -29,7 +28,7 @@ typedef struct {
 communityMember getMemberInfo();
 int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int snsNumber);
 void createMember(communityMember arrayMember[MAX_MEMBERS], int *quantity);
-void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity);
+void updateMember(communityMember arrayMember[MAX_MEMBERS],int membersQuantity);
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity);
 int vaccinatedMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuantity);
 int confinedMembersMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuantity);

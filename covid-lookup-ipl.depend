@@ -93,3 +93,64 @@
 	"covid_tests.h"
 	"menus.h"
 
+1642597655 source:/home/nicolau/ipl/programming/covid-lookup-ipl/aux_functions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+
+1642596479 /home/nicolau/ipl/programming/covid-lookup-ipl/aux_functions.h
+
+1642596381 source:/home/nicolau/ipl/programming/covid-lookup-ipl/covid_tests.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+	"covid_tests.h"
+	"menus.h"
+
+1642593564 /home/nicolau/ipl/programming/covid-lookup-ipl/members.h
+	"aux_functions.h"
+
+1642592163 /home/nicolau/ipl/programming/covid-lookup-ipl/covid_tests.h
+	"aux_functions.h"
+
+1642598105 source:/home/nicolau/ipl/programming/covid-lookup-ipl/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"menus.h"
+	"covid_tests.h"
+	"members.h"
+
+1642598496 /home/nicolau/ipl/programming/covid-lookup-ipl/menus.h
+	"covid_tests.h"
+	"members.h"
+
+1642598105 source:/home/nicolau/ipl/programming/covid-lookup-ipl/members.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+	"menus.h"
+	"members.h"
+
+1642598598 source:/home/nicolau/ipl/programming/covid-lookup-ipl/menus.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"members.h"
+	"aux_functions.h"
+	"covid_tests.h"
+	"menus.h"
+

@@ -5,20 +5,21 @@
 #include <locale.h>
 
 // Headers
-#include "members.h"
-#include "aux_functions.h"
-#include "covid_tests.h"
 #include "menus.h"
+#include "covid_tests.h"
+#include "members.h"
 
 // Main function
-int main(){
+int main() {
+    int membersQuantity = 0;
+    int testsQuantity = 0;
+    communityMember arrayMember[MAX_MEMBERS];
+    diagnosticTest *covidTests = NULL;
 
-    int quantity = 0;
-    communityMember members[MAX_MEMBERS];
-    diagnosticTest *tests = NULL;
+    // Call to main menu
+    mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
 
-    mainMenu(tests, quantity);
+    free(covidTests);
 
-    free(tests);
     return 0;
 }

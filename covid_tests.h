@@ -1,6 +1,8 @@
 #ifndef COVID_TESTS_H_INCLUDED
 #define COVID_TESTS_H_INCLUDED
 
+#define MAX_TESTS 15
+
 #include "aux_functions.h"
 
 // Structures
@@ -15,11 +17,11 @@ typedef struct {
 
 //Functions
 diagnosticTest readTests();
-int searchTests(diagnosticTest *arraytest, int quantity, int snsNumber);
-diagnosticTest *createTests(diagnosticTest *arraytest, int *number);
-void writeOnBin(diagnosticTest *arraytest, int *number);
-diagnosticTest *readBin(diagnosticTest *arraytest, int *number);
-void writeOnFile(diagnosticTest *arraytest, int number);
-int searchBySNS(diagnosticTest *arraytest, int number, int snsNumber);
+int searchTests(diagnosticTest *covidTests, int quantity, int snsNumber);
+diagnosticTest *createTests(diagnosticTest *covidTests, int *number);
+void writeOnBin(diagnosticTest *covidTests, int *number);
+diagnosticTest *readBin(diagnosticTest *covidTests, int *number);
+void writeOnFile(diagnosticTest *covidTests, int number);
+int searchBySNS(diagnosticTest *covidTests, int number, int snsNumber);
 
 #endif

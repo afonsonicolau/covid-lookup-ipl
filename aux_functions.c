@@ -4,7 +4,9 @@
 #include <ctype.h>
 #include <locale.h>
 
+// Aux functions header
 #include "aux_functions.h"
+
 
 void cleanBuffer(void) {
     char char_check;
@@ -14,21 +16,26 @@ void cleanBuffer(void) {
     } while (char_check != '\n' && char_check != EOF);
 }
 
-float readFloat(char message[MAX_STRING], float min, float max) {
-    float number;
-    int control;
+int readInt(char message[MAX_STRING], int min, int max) {
+    int number, control;
 
     do {
-        printf("%s (%.2f a %.2f) :", message, min, max);
-        control = scanf("%f", &number);
+        if (strcmp(message, "\tInsert a day") == 0) {
+            printf("\t%s (%d to %d): ", message, min, max);
+        }
+        else {
+            printf("\t%s: ", message);
+        }
+
+        control = scanf("%d", &number);
         cleanBuffer();
 
-        if (control == 0) {
-            printf("You must insert a float number: \n");
+        if (control == 0){
+            printf("\n\tYou must insert an integer \n");
         }
         else {
             if (number < min || number > max) {
-                printf("Invalid number, try again: \n");
+                printf("\n\tInvalid number, insert again...: \n");
             }
         }
     } while (number < min || number > max || control == 0);
@@ -36,20 +43,21 @@ float readFloat(char message[MAX_STRING], float min, float max) {
     return number;
 }
 
-int readInt(char message[MAX_STRING], int min, int max) {
-    int number, control;
+float readFloat(char message[MAX_STRING], float min, float max) {
+    float number;
+    int control;
 
     do {
-        printf("%s (%d a %d) :", message, min, max);
-        control = scanf("%d", &number);
+        printf("\t%s:", message);
+        control = scanf("%f", &number);
         cleanBuffer();
 
-        if (control == 0){
-            printf("You must insert an integer \n");
+        if (control == 0) {
+            printf("\n\tYou must insert a float number: \n");
         }
         else {
             if (number < min || number > max) {
-                printf("Invalid number, insert again...: \n");
+                printf("\n\tInvalid number, try again: \n");
             }
         }
     } while (number < min || number > max || control == 0);
@@ -61,13 +69,13 @@ void readString(char message[MAX_STRING], char arrayChar[MAX_STRING], int maxCha
     int sizeString;
 
     do {
-        printf("%s", message);
+        printf("\t%s: ", message);
         fgets(arrayChar, maxChar, stdin);
 
         sizeString = strlen(arrayChar);
 
         if (sizeString == 1) {
-            printf("Please insert some information!\n\n");
+            printf("\tPlease insert some information!\n\n");
         }
     } while (sizeString == 1);
 
@@ -79,12 +87,20 @@ void readString(char message[MAX_STRING], char arrayChar[MAX_STRING], int maxCha
     }
 }
 
-date readDate(void) {
+date readDate(char message[MAX_STRING]) {
     date date_read;
     int maxDaysMonth;
 
-    date_read.year = readInt("Insert a year: ", 2020, 2021);
-    date_read.month = readInt("Insert a month: ", 1, 12);
+    printf("\t%s:\n", message);
+
+    if (strcmp(message, "Date of Birth") == 0) {
+        date_read.year = readInt("\tInsert a year (1950 or 2004)", 1950, 2004);
+    }
+    else {
+        date_read.year = readInt("\tInsert a year (2020 or 2021)", 2020, 2021);
+    }
+
+    date_read.month = readInt("\tInsert a month (1 to 12)", 1, 12);
 
     switch (date_read.month) {
         case 2:
@@ -104,15 +120,18 @@ date readDate(void) {
             maxDaysMonth = 31;
     }
 
-    date_read.day = readInt("Insert a day: ", 1, maxDaysMonth);
+    date_read.day = readInt("\tInsert a day", 1, maxDaysMonth);
+
     return date_read;
 }
 
-time readTime(void) {
+time readTime(char message[MAX_STRING]) {
     time time_read;
 
-    time_read.hour = readInt("Insert an hour: ", 1, 24);
-    time_read.minute = readInt("Insert a minute: ", 0, 60);
+    printf("\t%s:\n", message);
+
+    time_read.hour = readInt("\tInsert an hour (1 to 24)", 1, 24);
+    time_read.minute = readInt("\tInsert a minute (0 to 60)", 0, 60);
 
     return time_read;
 }

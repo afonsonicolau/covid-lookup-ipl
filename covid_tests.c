@@ -6,31 +6,27 @@
 
 // Files
 #include "aux_functions.h"
-#include "members.h"
 #include "covid_tests.h"
+#include "menus.h"
 
-diagnosticTest readTests()
-{
-    diagnosticTest tests;
+diagnosticTest readTests() {
+    diagnosticTest test;
 
-    tests.snsNumber = readInt("SNS number: ", SNSNUMBER_MIN, SNSNUMBER_MAX);
-    tests.type = readInt("Test type (1 - PCR  2 - Antigen): ", 1, 2);
-    tests.result = readInt("Result: (1- Positive  2- Negative 3- Undefined)", 1, 3);
-    tests.timeTaken = readTime();
-    tests.dateTaken = readDate();
+    test.snsNumber = readInt("SNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
+    test.type = readInt("Test type (1 - PCR  || 2 - Antigen)", 1, 2);
+    test.result = 1; /* 1 - Positive || 2 - Negative || 3 - Undefined */
+    test.timeTaken = readTime("When was the test done");
+    test.dateTaken = readDate("");
 
-    return tests;
+    return test;
 }
 
-int searchTests(diagnosticTest *arraytest, int quantity, int snsNumber)
-{
+int searchTests(diagnosticTest *covidTests, int quantity, int snsNumber) {
     int i;
     int position = -1;
 
-    for (i = 0; i < quantity; i++)
-    {
-        if (arraytest[i].snsNumber == snsNumber)
-        {
+    for (i = 0; i < quantity; i++) {
+        if (covidTests[i].snsNumber == snsNumber) {
             position = i;
             i = quantity;
         }
@@ -39,103 +35,75 @@ int searchTests(diagnosticTest *arraytest, int quantity, int snsNumber)
     return position;
 }
 
-diagnosticTest *createTests(diagnosticTest *arraytest, int *number)
-{
+diagnosticTest *createTests(diagnosticTest *covidTests, int *quantity) {
     diagnosticTest *pTest, data;
-    int pos, snsNumber;
+    int pos;
 
-    pTest = arraytest;
+    pTest = covidTests;
     data = readTests();
-    pos = searchTests(arraytest, *number, data.snsNumber);
+    pos = searchTests(covidTests, *quantity, data.snsNumber);
 
-    if (pos != -1)
-    {
+    if (pos != -1) {
         printf("Test already done!");
     }
-    else
-    {
-        arraytest = realloc(arraytest, (*number + 1) * sizeof(diagnosticTest));
+    else {
+        covidTests = realloc(covidTests, (*quantity + 1) * sizeof(diagnosticTest));
 
-        if (arraytest == NULL)
-        {
+        if (covidTests == NULL) {
             printf("Error - Impossible to register a test!");
-            arraytest = pTest;
+            covidTests = pTest;
         }
-        else
-        {
-            arraytest[*number] = data;
-            (*number)++;
+        else {
+            covidTests[*quantity] = data;
+            (*quantity)++;
         }
     }
 
-    return arraytest;
+    return covidTests;
 }
 
-diagnosticTest *readBin(diagnosticTest *arraytest, int *number)
-{
+diagnosticTest *readBin(diagnosticTest *covidTests, int *number) {
     FILE *file;
 
     file = fopen("diagnosticTest.dat", "rb");
 
-    if (file == NULL)
-    {
+    if (file == NULL) {
         printf("Impossible to open the file!");
     }
-    else
-    {
+    else {
         fread(&(*number), sizeof(int), 1, file);
-        arraytest = realloc(arraytest, (*number) * sizeof(diagnosticTest));
+        covidTests = realloc(covidTests, (*number) * sizeof(diagnosticTest));
 
-        if (arraytest == NULL && *number != 0)
-        {
+        if (covidTests == NULL && *number != 0) {
             printf("Error allocating memory!");
             *number = 0;
         }
-        else
-        {
-            fread(arraytest, sizeof(diagnosticTest), *number, file);
+        else {
+            fread(covidTests, sizeof(diagnosticTest), *number, file);
         }
         fclose(file);
     }
-    return arraytest;
+
+    return covidTests;
 }
 
-int searchBySNS(diagnosticTest *arraytest, int number, int snsNumber)
-{
-    int i, pos;
-    pos = -1;
-
-    for (i = 0; i < number; i++)
-    {
-        if (arraytest[i].snsNumber == snsNumber)
-        {
-            pos = i;
-            i = number;
-        }
-    }
-    return pos;
-}
-
-void writeOnFile(diagnosticTest *arraytest, int number)
-{
+void writeOnFile(diagnosticTest *covidTests, int number) {
     FILE *file;
     int i;
     file = fopen("diagnosticTest.txt", "w");
 
-    if (file == NULL)
-    {
+    if (file == NULL) {
         printf("Impossible to open the file");
     }
-    else
-    {
+    else {
         fprintf(file, "Diagnostic Test =%d \n", number);
-        for (i = 0; i < number; i++)
-        {
-            fprintf(file, "%d \t", arraytest[i].snsNumber);
-            fprintf(file, "%d\n", arraytest[i].type);
-            fprintf(file, "%d \t", arraytest[i].result);
-            fprintf(file, "%d \t", arraytest[i].timeTaken);
+        for (i = 0; i < number; i++) {
+            fprintf(file, "%d \t", covidTests[i].snsNumber);
+            fprintf(file, "%d\n", covidTests[i].type);
+            fprintf(file, "%d \t", covidTests[i].result);
+            fprintf(file, "%d:%d \t", covidTests[i].timeTaken.hour, covidTests[i].timeTaken.minute);
         }
+
         fclose(file);
     }
 }

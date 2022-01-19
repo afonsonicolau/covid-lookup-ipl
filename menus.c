@@ -12,16 +12,34 @@
 // Menus Headers
 #include "menus.h"
 
+void membersMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
+    int optionChoosen;
+    int vaccinatedQuantity = vaccinatedMembers(arrayMember, membersQuantity);
 
-void testsPaths(diagnosticTest *arrayTest, int quantity, int option) {
-    int snsNumber = 0;
-    switch (option) {
-        case 1: // Create Member
-            createTests(arrayTest, &quantity);
+    do {
+        printf("\t**************************************************");
+        printf("\n\t** \t\t\t\t\t\t**");
+        printf("\n \t** \t\tCLS - Member Options \t\t**");
+        printf("\n\t** \t\t\t\t\t\t**");
+        printf("\n\t**************************************************");
+
+        printf("\n\n\tMembers Created: %d", membersQuantity);
+        printf("\n\tMembers Vaccinated: %d", vaccinatedQuantity);
+
+
+        printf("\n\n\t1. Create Member");
+        printf("\n\t2. List Members");
+        printf("\n\t3. Update Member");
+
+        optionChoosen = readInt("\n\n\tOption", 1, 3);
+    } while (optionChoosen < 1 &&  optionChoosen > 3);
+
+    switch (optionChoosen) {
+        case 1: // Create Members
+            createMember(arrayMember, &membersQuantity);
             break;
-        case 2: // List Member
-            snsNumber = readInt("SNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
-            searchBySNS(arrayTest, quantity, snsNumber);
+        case 2: // List Members
+            listMembers(arrayMember, membersQuantity);
             break;
         case 3: // Update Member
 
@@ -30,10 +48,13 @@ void testsPaths(diagnosticTest *arrayTest, int quantity, int option) {
         default:
             break;
     }
+
+    mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
 }
 
-void testsMenu(diagnosticTest *arrayTest, int quantity) {
+void testsMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
     int optionChoosen;
+    int snsNumber = 0;
 
     do {
         printf("\t**************************************************");
@@ -52,20 +73,38 @@ void testsMenu(diagnosticTest *arrayTest, int quantity) {
         optionChoosen = readInt("\n\n\tOption", 1, 3);
     } while (optionChoosen < 1 &&  optionChoosen > 3);
 
-    testsPaths(arrayTest, quantity, optionChoosen);
+    switch (optionChoosen) {
+        case 1: // Create Test
+            createTests(covidTests, &testsQuantity);
+            break;
+        case 2: // List Tests
+            snsNumber = readInt("SNS Number", SNSNUMBER_MIN, SNSNUMBER_MAX);
+            searchTests(covidTests, testsQuantity, snsNumber);
+            break;
+        case 3: // Update Testa Date
+
+            break;
+
+        default:
+            break;
+    }
+
+    mainMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
 }
 
-
-void programMenu(diagnosticTest *arrayTest, int quantity, int option) {
+void redirectingMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity, int option) {
     switch (option) {
         case 1: // Member Menu
+            membersMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
             break;
         case 2: // Vaccination Menu
+            printf("Ainda nao");
             break;
         case 3: // Test Menu
-            testsMenu(arrayTest, quantity);
+            testsMenu(covidTests, arrayMember, membersQuantity, testsQuantity);
             break;
         case 4: // Confinment Menu
+            printf("Ainda nao");
             break;
 
         default:
@@ -73,8 +112,11 @@ void programMenu(diagnosticTest *arrayTest, int quantity, int option) {
     }
 }
 
-void mainMenu(diagnosticTest *arrayTest, int quantity) {
+void mainMenu(diagnosticTest *covidTests, communityMember arrayMember[MAX_MEMBERS], int membersQuantity, int testsQuantity) {
     int optionChoosen;
+    int vaccinatedQuantity = vaccinatedMembers(arrayMember, membersQuantity);
+    int testsScheduled = 0;
+    int testsPerformed = 0;
 
     do {
         printf("\t**************************************************");
@@ -83,8 +125,8 @@ void mainMenu(diagnosticTest *arrayTest, int quantity) {
         printf("\n\t** \t\t\t\t\t\t**");
         printf("\n\t**************************************************");
 
-        printf("\n\n\tMembers Inserted: %d \t\tTests Scheduled: %d", 1, 1);
-        printf("\n\tMembers Vaccinated: %d \t\tTests Performed: %d", 1, 1);
+        printf("\n\n\tMembers Created: %d \t\tTests Scheduled: %d", membersQuantity, testsScheduled);
+        printf("\n\tMembers Vaccinated: %d \t\tTests Performed: %d", vaccinatedQuantity, testsPerformed);
 
         printf("\n\n\t1. Member Options");
         printf("\n\t2. Vaccination Options");
@@ -94,6 +136,5 @@ void mainMenu(diagnosticTest *arrayTest, int quantity) {
         optionChoosen = readInt("\n\n\tOption", 1, 4);
     } while (optionChoosen < 1 &&  optionChoosen > 4);
 
-    programMenu(arrayTest, quantity, optionChoosen);
+    redirectingMenu(covidTests, arrayMember, membersQuantity, testsQuantity, optionChoosen);
 }
-

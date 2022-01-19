@@ -25,11 +25,12 @@ typedef struct {
     date lastVaccine;
 } communityMember;
 
-
 // Functions
-communityMember readNewMemberInfo();
+communityMember getMemberInfo();
 int searchMember(communityMember arrayMember[MAX_MEMBERS], int quantity, int number);
 void createMember(communityMember arrayMember[MAX_MEMBERS], int *quantity);
+void updateMember(communityMember arrayMember[MAX_MEMBERS],int quantity)
 void listMembers(communityMember arrayMember[MAX_MEMBERS], int quantity);
+int vaccinatedMembers(communityMember arrayMember[MAX_MEMBERS], int membersQuantity);
 
 #endif

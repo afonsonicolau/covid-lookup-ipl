@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1642523007 source:c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\aux_functions.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+
+1642552074 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\aux_functions.h
+
+1642550007 source:c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\covid_tests.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+	"members.h"
+	"covid_tests.h"
+
+1642551268 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\members.h
+	"aux_functions.h"
+
+1642552074 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\covid_tests.h
+	"aux_functions.h"
+
+1642551649 source:c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"members.h"
+	"aux_functions.h"
+	"covid_tests.h"
+	"menus.h"
+
+1642551719 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\menus.h
+	"aux_functions.h"
+	"covid_tests.h"
+	"members.h"
+
+1642549866 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\menus.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"members.h"
+	"aux_functions.h"
+	"covid_tests.h"
+	"covid_tests.c"
+	"menus.h"
+
+1642549492 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\members.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+	"members.h"
+
+1642550007 c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\covid_tests.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+	"members.h"
+	"covid_tests.h"
+
+1642551581 source:c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\members.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"aux_functions.h"
+	"menus.h"
+	"members.h"
+
+1642551675 source:c:\users\zefra\onedrive\ambiente de trabalho\covid-lookup-ipl\covid-lookup-ipl\menus.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<locale.h>
+	"members.h"
+	"aux_functions.h"
+	"covid_tests.h"
+	"menus.h"
+

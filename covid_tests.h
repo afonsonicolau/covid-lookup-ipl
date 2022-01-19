@@ -9,9 +9,17 @@ typedef struct {
     int snsNumber;
     int type;
     int result;
-    int duration;
     time timeTaken;
     date dateTaken;
 } diagnosticTest;
+
+//Functions
+diagnosticTest readTests();
+int searchTests(diagnosticTest *arraytest, int quantity, int snsNumber);
+diagnosticTest *createTests(diagnosticTest *arraytest, int *number);
+void writeOnBin(diagnosticTest *arraytest, int *number);
+diagnosticTest *readBin(diagnosticTest *arraytest, int *number);
+void writeOnFile(diagnosticTest *arraytest, int number);
+int searchBySNS(diagnosticTest *arraytest, int number, int snsNumber);
 
 #endif

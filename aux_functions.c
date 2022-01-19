@@ -107,3 +107,12 @@ date readDate(void) {
     date_read.day = readInt("Insert a day: ", 1, maxDaysMonth);
     return date_read;
 }
+
+time readTime(void) {
+    time time_read;
+
+    time_read.hour = readInt("Insert an hour: ", 1, 24);
+    time_read.minute = readInt("Insert a minute: ", 0, 60);
+
+    return time_read;
+}

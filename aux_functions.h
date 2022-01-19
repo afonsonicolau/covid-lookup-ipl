@@ -3,6 +3,7 @@
 
 // Constants
 #define MAX_STRING 50
+#define MAX_TESTS 15
 
 // Structures
 typedef struct {
@@ -22,5 +23,6 @@ float readFloat(char message[MAX_STRING], float min, float max);
 int readInt(char message[MAX_STRING], int min, int max);
 void readString(char message[MAX_STRING], char arrayChar[MAX_STRING], int maxChar);
 date readDate(void);
+time readTime(void);
 
 #endif

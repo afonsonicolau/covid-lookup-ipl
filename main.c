@@ -8,12 +8,17 @@
 #include "members.h"
 #include "aux_functions.h"
 #include "covid_tests.h"
+#include "menus.h"
 
 // Main function
-int main() {
-    communityMember member[MAX_MEMBERS];
+int main(){
 
-    mainMenu();
+    int quantity = 0;
+    communityMember members[MAX_MEMBERS];
+    diagnosticTest *tests = NULL;
 
+    mainMenu(tests, quantity);
+
+    free(tests);
     return 0;
 }
